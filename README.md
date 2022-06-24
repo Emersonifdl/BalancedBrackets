@@ -15,7 +15,7 @@ The BalancedBrackets has a requirements:
 Clone the repository:
 
 ```
-git clone git@github.com:Emersonifdl/BalancedBrackets.git
+git clone git@github.com:Emersonifdl/balanced-brackets.git
 ```
 
 ## ☕ Get Started
