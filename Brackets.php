@@ -1,7 +1,9 @@
 <?php
+
 class Brackets
 {
     private array $stack = [];
+    private array $openingBrackets = ['(' => ')', '[' => ']', '{' => '}'];
 
     public function __construct(private string $bracketsInput)
     {
@@ -10,26 +12,18 @@ class Brackets
     public function isBalanced(): bool
     {
         foreach (str_split($this->bracketsInput) as $bracket) {
-            if ($bracket == '[' || $bracket == '{' || $bracket == '(') {
-                array_push($this->stack, $bracket);
+            if (array_key_exists($bracket, $this->openingBrackets)) {
+                $this->stack[] = $bracket;
                 continue;
             }
 
             $lastElement = array_pop($this->stack);
 
-            if ($bracket == ']' && $lastElement != '[') {
-                return false;
-            }
-
-            if ($bracket == '}' && $lastElement != '{') {
-                return false;
-            }
-
-            if ($bracket == ')' && $lastElement != '(') {
+            if ($lastElement === null || $this->openingBrackets[$lastElement] !== $bracket) {
                 return false;
             }
         }
 
-        return count($this->stack) === 0;
+        return empty($this->stack);
     }
 }
